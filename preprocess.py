@@ -120,6 +120,7 @@ df['Street'] = features['Street']
 
 # Alley - Type of alley access to property
 print_stats(features, 'Alley')
+
 # Percentage missing = 93.21% , Classes are PAve and Grvl. NA means no Alley. Impute with NoAlley
 df['Alley'] = features['Alley'].fillna("NoAlley")
 
@@ -213,54 +214,65 @@ print_stats(features, 'YearRemodAdd')
 
 # No missing values
 df['YearRemodAdd'] = features['YearRemodAdd']
-#%% RoofStyle
+
+# RoofStyle - Type of roof
 print_stats(features, 'RoofStyle')
 
 # no missing values
 df['RoofStyle'] = features['RoofStyle']
-#%% RoofMatl
+
+# RoofMatl - Roof Material
 print_stats(features, 'RoofMatl')
 # no missing values
 
 df['RoofMatl'] = features['RoofMatl']
-#%% Exterior1st
-print_stats(features, 'Exterior1st')
-df['Exterior1st'] = features['Exterior1st'].fillna(features['Exterior1st'].mode()[0])
-# 1 missing value, 17 classes, "VinylSd" has 35% values. Impute with that. 
 
-#%% Exterior2nd
+# Exterior1st - Exterior covering on house
+
+print_stats(features, 'Exterior1st')
+
+# 1 missing value, 17 classes, "VinylSd" has 35% values. Impute with that. 
+df['Exterior1st'] = features['Exterior1st'].fillna(features['Exterior1st'].mode()[0])
+
+
+# Exterior2nd - Exterior covering on house (if more than 1 material)
+
 print_stats(features, 'Exterior2nd')
 df['Exterior2nd'] = features['Exterior2nd'].fillna(features['Exterior2nd'].mode()[0])
 # 1 missing value, "VinylSd" has 34% values. Impute with that.
 
-#%% MasVnrType - Masonry veneer type
+# MasVnrType - Masonry veneer type
 print_stats(features, 'MasVnrType')
 # 24 missing values, None means No Masonry Veneer
 # Percentage missing = 0.82%, None has 59% values, Impute with "None"
-df['MasVnrType'] = features['MasVnrType'].fillna(features['MasVnrType'].mode()[0])
+df['MasVnrType'] = features['MasVnrType'].fillna("None")
 
-#%% MasVnrArea
+# MasVnrArea - Masonry veneer area in square feet
 print_stats(features, 'MasVnrArea')
 
 # 23 missing values, Percentage missing = 0.01, Mean =102.2013 , Median = 0, 0 means no masonry veneer  
-df['MasVnrArea'] = features['MasVnrArea']
-#%% ExterQual
+df['MasVnrArea'] = features['MasVnrArea'].fillna(0)
+
+# ExterQual - Evaluates the quality of the material on the exterior
+
 print_stats(features, 'ExterQual')
 
 # no missing values, 5 classes
 df['ExterQual'] = features['ExterQual']
 
-#%% ExterCond
+# ExterCond - Evaluates the present condition of the material on the exterior
 print_stats(features, 'ExterCond')
 
 # no missing values, 5 classes, 86% in 'TA'  
 df['ExterCond'] = features['ExterCond']
-#%% Foundation
+
+# Foundation - Type of foundation
 print_stats(features, 'Foundation')
 
 # no missing values
 df['Foundation'] = features['Foundation']
-#%% BsmtQual
+
+# BsmtQual - Evaluates the height of the basement
 print_stats(features, 'BsmtQual')
 
 # 81 missing values, Percentage missing =2.77%, Even ditributed classes, Impute with NoBasement
@@ -271,273 +283,309 @@ print_stats(features, 'BsmtQual')
 
 df['BsmtQual'] = features['BsmtQual'].fillna("NoBasement")
 
-#%% BsmtExposure
+# BsmtCond - Evaluates the general condition of the basement
+print_stats(features, 'BsmtCond')
+
+# 82 missing values, 4 classes. Missing value means NoBasement
+df['BsmtCond'] = features['BsmtCond'].fillna("NoBasement")
+
+# BsmtExposure - Refers to walkout or garden level walls
 print_stats(features, 'BsmtExposure')
 
 # 82 missing values, 4 classes, 65% and 14%, do percentage imputation
 df['BsmtExposure'] = features['BsmtExposure'].fillna("NoBasement")
 
-
-#%% BsmtFinType1 - Rating of basement finished area
-
+# BsmtFinType1 - Rating of basement finished area
 print_stats(features, 'BsmtFinType1')
 # 79  missing values - percentage imputation
 
 df['BsmtFinType1'] = features['BsmtFinType1'].fillna("NoBasement")
 
-#%% BsmtFinSF1
+# BsmtFinSF1 - Type 1 finished square feet
 print_stats(features, 'BsmtFinSF1')
 # 1 missing value, Impute with 0
 # Percentage missing = 0, Mean =441.4232 , Median =368.5 
 
 df['BsmtFinSF1'] = features['BsmtFinSF1'].fillna(features['BsmtFinSF1'].median())
 
-#%% BsmtFinType2 - Rating of basement finished area (if multiple )
+# BsmtFinType2 - Rating of basement finished area (if multiple )
 print_stats(features, 'BsmtFinType2')
 
-# 80 missing values, 
-
+# 80 missing values, 6 classes, impute with "NoBasement"
 df['BsmtFinType2'] = features['BsmtFinType2'].fillna("NoBasement")
 
-#%%BsmtFinSF2
+# BsmtFinSF2 - Type 2 finished square feet
 print_stats(features, 'BsmtFinSF2')
 
-# Percentage missing = 0, Mean =49.58 , Median =0 , Imputed with 
-#df['BsmtFinSF2'] = features['BsmtFinSF2'].fillna(features['BsmtFinSF2'].median())
-#%% BsmtUnfSF
+# 1 missing value, Mean =49.58 , Median =0 , Impute with 0 
+df['BsmtFinSF2'] = features['BsmtFinSF2'].fillna(features['BsmtFinSF2'].median())
+
+# BsmtUnfSF - Unfinished square feet of basement area
 print_stats(features, 'BsmtUnfSF')
 
-# Percentage missing = 0, Mean =560.772 , Median =467 , Imputed with 
+# 1 missing value, Mean =560.772 , Median =467 , Imputed with median
 
-#%% TotalBsmtSF
+df['BsmtUnfSF'] = features['BsmtUnfSF'].fillna(features['BsmtUnfSF'].median())
+
+# TotalBsmtSF - Total square feet of basement area
 print_stats(features, 'TotalBsmtSF')
 
 # 1 missing value, Mean = 1051.777, Median =989.5 , Imputed with median
 
 df['TotalBsmtSF'] = features['TotalBsmtSF'].fillna(features['TotalBsmtSF'].median())
-#%% Heating
+# Heating - Type of heating
 print_stats(features, 'Heating')
 
 # no missing values, 6 classes, 'GasA' has 98% values
 df['Heating'] = features['Heating']
-#%% HeatingQC
+
+# HeatingQC - Heating quality and condition
 print_stats(features, 'HeatingQC')
 
 # no missing values, 5 classes,
 
 df['HeatingQC'] = features['HeatingQC']
 
-#%% CentralAir
+# CentralAir - Central air conditioning
 print_stats(features, 'CentralAir')
 
 # 0 missing values, 2 classes, Y and N, 6% values in N
 df['CentralAir'] = features['CentralAir']
 
-#%% Electrical
+# Electrical - Electrical System
 print_stats(features, 'Electrical')
 
 # 1 missing value - 5 classes, 91% values in "SBrkr", Impute with mode
 df['Electrical'] = features['Electrical'].fillna(features['Electrical'].mode()[0])
 
-#%% 1stFlrSF
+# 1stFlrSF - First floor square feet
 print_stats(features, '1stFlrSF')
 
-# Percentage missing = 0, Mean =1159.581 , Median = , Imputed with 
-#%% 2ndFlrSF
+# No missing values
+df['1stFlrSF'] = features['1stFlrSF']
+
+# 2ndFlrSF
 print_stats(features, '2ndFlrSF')
 
-# Percentage missing = 0, Mean =336.483 , Median =0 , Imputed with 
-#df[''] = features['']
+# No missing values
+df['2ndFlrSF'] = features['2ndFlrSF']
 
-#%% LowQualFinSF
+# LowQualFinSF - Low quality finished square feet (all floors)
 print_stats(features, 'LowQualFinSF')
 
-# Percentage missing = 0, Mean =4.694 , Median =0 , Imputed with 
-#%% GrLivArea
+# No missing values
+df['LowQualFinSF'] = features['LowQualFinSF']
+
+# GrLivArea - Above grade (ground) living area square feet
 print_stats(features, 'GrLivArea')
 
-# Percentage missing = 0, Mean =1500.75 , Median =1444 , Imputed with 
-
-#%% BsmtFullBath
+# No missing values
+df['GrLivArea'] = features['GrLivArea']
+# BsmtFullBath - basement full bathrooms
 print_stats(features, 'BsmtFullBath')
 
-# Percentage missing = 0, Mean =0.4298 , Median =0 , Imputed with 
+# 2 missing values, Number of bathrooms - 0, 1, 2, 3 and nan, mode is 0, impute with mode
+df['BsmtFullBath'] = features['BsmtFullBath'].fillna(features['BsmtFullBath'].mode()[0])
 
-#%% BsmtHalfBath
+# BsmtHalfBath
 print_stats(features, 'BsmtHalfBath')
 
-# Percentage missing = 0, Mean =0.06136 , Median =0 , Imputed with 
+# 2 missing values, Number of bathrooms - 0, 1, 2, 3 and nan, mode is 0, impute with mode 
+df['BsmtHalfBath'] = features['BsmtHalfBath']
 
-#%% FullBath
+# FullBath
 print_stats(features, 'FullBath')
 
-# Percentage missing = 0, Mean =1.568 , Median =2 , Imputed with 
+# No missing values 
+df['FullBath'] = features['FullBath']
 
-#%% HalfBath
+# HalfBath
 print_stats(features, 'HalfBath')
 
-# Percentage missing = 0, Mean =0.38 , Median =0 , Imputed with 
+# No missing values 
+df['HalfBath'] = features['HalfBath']
 
-#%% Bedroom
+# Bedroom - Bedrooms above grade
 print_stats(features, 'BedroomAbvGr')
 
-# Percentage missing = 0, Mean =2.860 , Median =3 , Imputed with 
+# No missing values 
+df['BedroomAbvGr'] = features['BedroomAbvGr']
 
-#%% Kitchen
+# Kitchen - Kitchens above grade
 print_stats(features, 'KitchenAbvGr')
 
-# Percentage missing = 0, Mean =1.044 , Median =1 , Imputed with 
-#%% KitchenQual
+# No missing values 
+df['KitchenAbvGr'] = features['KitchenAbvGr']
+
+# KitchenQual - 
 print_stats(features, 'KitchenQual')
 
-# Percentage missing = 0.0003, Mean = , Median = , Imputed with 
+# 1 missing value, 4 classes, 51% in "TA", Imputed with mode
+df['KitchenQual'] = features['KitchenQual'].fillna(features['KitchenQual'].mode()[0])
 
-#%% TotRmsAbvGrd
+# TotRmsAbvGrd - Total rooms above grade (does not include bathrooms)
 print_stats(features, 'TotRmsAbvGrd')
 
-# Percentage missing = 0, Mean = 6.451, Median =6 , Imputed with 
-#%% Functional
+# No missing values 
+df['TotRmsAbvGrd'] = features['TotRmsAbvGrd']
+
+# Functional - Home functionality (Assume typical unless deductions are warranted)
 print_stats(features, 'Functional')
 
-# Percentage missing = 0.0007, Mean = , Median = , Imputed with 
-#%% Fireplaces
+# 2 missing values, 8 classes, 93% in "Typ", Imputed with Typ
+df['Functional'] = features['Functional'].fillna(features['Functional'].mode()[0])
+
+# Fireplaces - Number of fireplaces
 print_stats(features, 'Fireplaces')
 
 # 0 missing values
-df[''] = features['']
-#%% FireplaceQu
+df['Fireplaces'] = features['Fireplaces']
+
+# FireplaceQu - Fireplaces
 print_stats(features, 'FireplaceQu')
 
-# Percentage missing = 0.4865, Mean = , Median = , Imputed with 
-#%% GarageType - Garage location
+# Percentage missing = 48.65%, Missing values means no fireplace, Imputed with "NoFireplace"
+df['FireplaceQu'] = features['FireplaceQu'].fillna("NoFireplace")
+
+# GarageType - Garage location
 print_stats(features, 'GarageType')
 
 # 157 missing values, missing value means NoGarage, impute with "NoGarage"
 df['GarageType'] = features['GarageType'].fillna("NoGarage")
 
-#%% GarageYrBlt
+# GarageYrBlt - Year garage was built
 print_stats(features, 'GarageYrBlt')
+# 159 missing values
+
 features['GarageYrBlt'] = features['GarageYrBlt'].astype(str)
 
 df['GarageYrBlt'] = features['GarageYrBlt'].fillna("NoGarage")
 
-# 159 missing values
-# Percentage missing = 0.05, Mean =1978.11 , Median =1979 , Imputed with 
-#%% GarageFinish
+# GarageFinish - Interior finish of the garage
 print_stats(features, 'GarageFinish')
 
 # 159 missing values, impute with "NoGarage"
 df['GarageFinish'] = features['GarageFinish'].fillna("NoGarage")
 
-#%% GarageCars - Size of garage in car capacity
+# GarageCars - Size of garage in car capacity
 print_stats(features, 'GarageCars')
 
 # 1 missing value, Mode is 2, Impute with 2, Keep it as numeric field itself 
-# Mean =1.766 , Median =2 
+df['GarageCars'] = features['GarageCars'].fillna(features['GarageCars'].mode()[0])
 
-#%% GarageArea
+# GarageArea - Size of garage in square feet
 print_stats(features, 'GarageArea')
 
 # 1 missing value, lot of zero values, Zero means NoGarage, Mean =472.874 , Median =480, Impute with median  
 df['GarageArea'] = features['GarageArea'].fillna(features['GarageArea'].median())
 
-#%% GarageQual
+# GarageQual - Garage quality
 print_stats(features, 'GarageQual')
 
-# Percentage missing = 0.0545, Mean = , Median = , Imputed with
+# 159 missing values, Percentage missing = 5.45%, Imputed with NoGarage
+df['GarageQual'] = features['GarageQual'].fillna("NoGarage")
 
-#%% GarageCond
+# GarageCond - Garage condition
 print_stats(features, 'GarageCond')
 
-# Percentage missing = 0.0545, Mean = , Median = , Imputed with
+# 159 missing values, Percentage missing = 5.45%, Imputed with NoGarage
+df['GarageCond'] = features['GarageCond'].fillna("NoGarage")
 
-#%% PavedDrive - Paved Driveway
+# PavedDrive - Paved Driveway
 print_stats(features, 'PavedDrive')
 #       Y	Paved 
 #       P	Partial Pavement
 #       N	Dirt/Gravel
-# no missing values
+# no missing values, 90% values in "Y"
 
-# Percentage missing = 0, 90% values in "Y"
 df['PavedDrive'] = features['PavedDrive']
-#%% WoodDeckSF - Wood Deck Area in square feet
+
+# WoodDeckSF - Wood Deck Area in square feet
 print_stats(features, 'WoodDeckSF')
-# no missing values
-# Percentage missing = 0, Mean =93.7098 , Median =0 , 0 value means Wood Deck
+# no missing values, Mean =93.7098 , Median =0 , 0 value means Wood Deck
 df['WoodDeckSF'] = features['WoodDeckSF']
-#%% OpenPorchSF - Screen porch area in square feet
+
+# OpenPorchSF - Screen porch area in square feet
 print_stats(features, 'OpenPorchSF')
-# no missing values
-# Percentage missing = 0, Mean =47.48 , Median =26 , 0 value means NoPorch
+
+# no missing values, Mean =47.48 , Median =26 , 0 value means NoPorch
 df['OpenPorchSF'] = features['OpenPorchSF']
-#%% EnclosedPorch - Enclosed porch area in square feet
+
+# EnclosedPorch - Enclosed porch area in square feet
 print_stats(features, 'EnclosedPorch')
-# no missing values
-# Percentage missing = 0, Mean =23.098 , Median =0 , 0 value means NoPorch
+
+# no missing values, Mean =23.098 , Median =0 , 0 value means NoPorch
 df['EnclosedPorch'] = features['EnclosedPorch']
-#%% 3SsnPorch - Three season porch area in square feet
+
+# 3SsnPorch - Three season porch area in square feet
 print_stats(features, '3SsnPorch')
 
 # Percentage missing = 0, Mean =2.6022 , Median =0 , 0 value means NoPorch
 df['3SsnPorch'] = features['3SsnPorch']
-#%% ScreenPorch - Screen porch area in square feet
-print_stats(features, 'ScreenPorch')
-# no missing values
-# Percentage missing = 0, Mean =16.062 , Median =0 , 0 value means NoPorch 
-df['ScreenPorch'] = features['ScreenPorch']
-#%% PoolArea
-print_stats(features, 'PoolArea')
-# no missing values
-# Percentage missing = 0, Mean =2.251 , Median =0, 0 value means NoPool 
-df['PoolArea'] = features['PoolArea']
-#%% PoolQC
-print_stats(features, 'PoolQC')
-df['PoolQC'] = features['PoolQC'].fillna("NoPool")
-# Percentage missing = 99.66, Impute with "NoPool"
 
-#%% Fence
+# ScreenPorch - Screen porch area in square feet
+print_stats(features, 'ScreenPorch')
+# no missing values,  Mean =16.062 , Median =0 , 0 value means NoPorch 
+df['ScreenPorch'] = features['ScreenPorch']
+
+# PoolArea
+print_stats(features, 'PoolArea')
+
+# no missing values, Mean =2.251 , Median =0, 0 value means NoPool 
+df['PoolArea'] = features['PoolArea']
+
+# PoolQC
+print_stats(features, 'PoolQC')
+
+# Percentage missing = 99.66, Impute with "NoPool"
+df['PoolQC'] = features['PoolQC'].fillna("NoPool")
+
+# Fence
 print_stats(features, 'Fence')
 df['Fence'] = features['Fence'].fillna("NoFence")
 # Percentage missing = 80.4, Impute with "NoFence" 
 
-#%% MiscFeature
+# MiscFeature - Miscellaneous feature not covered in other categories
 print_stats(features, 'MiscFeature')
+
+# Percentage missing = 96.4%, 2814 missing values, 6 categories,  Impute with "NoMiscFeature"
 df['MiscFeature'] = features['MiscFeature'].fillna("NoMiscFeature")
 
-# Percentage missing = 96.4%, 2814 missing values, Impute with "NoMiscFeature"
-
-#%% MiscVal - Value of miscellaneous feature
+# MiscVal - Value of miscellaneous feature
 print_stats(features, 'MiscVal')
 
 # no missing values, mdeian = 0, mean = 56.825
 df['MiscVal'] = features['MiscVal']
 
-#%% MoSold
+# MoSold
 print_stats(features, 'MoSold')
-df['MoSold'] = features['MoSold'].astype(str)
+
 # no missing values
-# Percentage missing = 0, Mean =6.213 , Median =6 , Imputed with
-#%% YrSold
+df['MoSold'] = features['MoSold'].astype(str)
+
+# YrSold - Year Sold (YYYY)
 print_stats(features, 'YrSold')
 
+# No missing values
 df['YrSold'] = features['YrSold'].astype(str)
-# Percentage missing = 0, Mean =2007.792 , Median =2008 , Imputed with
 
-#%% SaleType
+# SaleType - Type of sale
 print_stats(features, 'SaleType')
 
-# 1 missing value, 86% values in "WD" class. Impute with that. 
+# 1 missing value, 10 classes, 86% values in "WD" class. Impute with that. 
 df['SaleType'] = features['SaleType'].fillna(features['SaleType'].mode()[0])
 
-#%% SaleCondition
+# SaleCondition - Condition of sale
 print_stats(features, 'SaleCondition')
+
+# No missing values, 6 classes, 82% values in 'Normal' class
 df['SaleCondition'] = features['SaleCondition']
-# No missing values, 6 classes, 82% values in 'Normal' class 
+ 
+#%% Export to CSV
 
-#%% Export this dataframe to CSV
+df.to_csv("data/cleaned_df.csv", index = False, header = True)
 
-#df.to_csv("data/preprocessed.csv", index = False)
-
+#%%
 # Also save the datatype of each variable so that 
 
 column_dtype = {}
@@ -553,6 +601,7 @@ for item in column_dtype:
 import pickle
 with open('data/column_dtype_dict.pickle', "wb") as f:
     pickle.dump(column_dtype, f, protocol = 2)
+    
 #%%
 
 # BsmtQual, BsmtCond, BsmtExposure, BsmtFinType1, BsmtFinType2
@@ -587,9 +636,6 @@ cat_vars = ['MSSubClass', 'MSZoning', 'Street',
 
 
 #%%
-
-#%%
-
 # =============================================================================
 # # Training
 # =============================================================================
@@ -607,3 +653,34 @@ cat_vars = ['MSSubClass', 'MSZoning', 'Street',
 #%% EXPORT TO CSV
 
 #pd.DataFrame({'Id': test.Id, 'SalePrice': Final_labels}).to_csv('name_of_the_file.csv', index =False)
+
+
+
+#%%
+
+
+def trimm_correlated(df, threshold):
+    df_corr = df.corr(method = 'pearson', min_periods = 1)
+    df_not_correlated =~(df_corr.mask(np.tril(np.ones([len(df_corr)]*2, dtype = 'bool'))).abs() > threshold).any()
+    un_corr_idx = df_not_correlated.loc[df_not_correlated[df_not_correlated.index] == True].index
+    df_out = df[un_corr_idx]
+    return df_out
+
+
+#%%
+num_df = pd.DataFrame()
+    
+for column in df.columns:
+    if df[column].dtype != 'object':
+        num_df[column] = df[column]
+
+num_df = num_df.iloc[: , 1:]
+
+#%%
+
+uncorr_df = trimm_correlated(num_df, 0.5)
+
+
+#%%
+
+corr_matrix_df = df.corr()
