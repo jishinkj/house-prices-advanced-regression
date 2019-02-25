@@ -44,42 +44,10 @@ features = pd.concat([train_IDVs, test], keys=['train', 'test'])
 # LOAD THIS DATASET
 features = pd.read_csv('data/concatedDatasetBeforeCleaning.csv')
 
-#%% IGNORE
-'''
-features.drop(['Utilities', 'RoofMatl', 'MasVnrArea', 'BsmtFinSF1', 'BsmtFinSF2', 
-               'BsmtUnfSF', 'Heating', 'LowQualFinSF','BsmtFullBath', 'BsmtHalfBath', 
-               'Functional', 'GarageYrBlt', 'GarageArea', 'GarageCond', 'WoodDeckSF',
-               'OpenPorchSF', 'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 
-               'PoolQC', 'Fence', 'MiscFeature', 'MiscVal'],axis=1, inplace=True)
-'''
 # =============================================================================
 # Missing Value Imputation and Type Conversion
 # =============================================================================
 
-'''
-columns = ['Id', 'MSSubClass', 'MSZoning', 'LotFrontage', 'LotArea', 'Street',
-       'Alley', 'LotShape', 'LandContour', 'Utilities', 'LotConfig',
-       'LandSlope', 'Neighborhood', 'Condition1', 'Condition2', 'BldgType',
-       'HouseStyle', 'OverallQual', 'OverallCond', 'YearBuilt', 'YearRemodAdd',
-       'RoofStyle', 'RoofMatl', 'Exterior1st', 'Exterior2nd', 'MasVnrType',
-       'MasVnrArea', 'ExterQual', 'ExterCond', 'Foundation', 'BsmtQual',
-       'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinSF1',
-       'BsmtFinType2', 'BsmtFinSF2', 'BsmtUnfSF', 'TotalBsmtSF', 'Heating',
-       'HeatingQC', 'CentralAir', 'Electrical', '1stFlrSF', '2ndFlrSF',
-       'LowQualFinSF', 'GrLivArea', 'BsmtFullBath', 'BsmtHalfBath', 'FullBath',
-       'HalfBath', 'BedroomAbvGr', 'KitchenAbvGr', 'KitchenQual',
-       'TotRmsAbvGrd', 'Functional', 'Fireplaces', 'FireplaceQu', 'GarageType',
-       'GarageYrBlt', 'GarageFinish', 'GarageCars', 'GarageArea', 'GarageQual',
-       'GarageCond', 'PavedDrive', 'WoodDeckSF', 'OpenPorchSF',
-       'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 'PoolQC',
-       'Fence', 'MiscFeature', 'MiscVal', 'MoSold', 'YrSold', 'SaleType',
-       'SaleCondition']
-'''
-# fruit = pd.Series(['banana'] * 57 + ['apple'] * 54 + [None] * 10, name='fruit')
-
-
-# nullfruit = fruit.isnull()
-# fruit.loc[nullfruit] = fruit.dropna().sample(nullfruit.sum()).values
 #%% Id
 df = pd.DataFrame()
 df['Id'] = features['Id']
